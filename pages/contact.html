@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="تواصل مع إدارة منصة Cyber Challenge">
+
+    <title>تواصل معنا | Cyber Challenge</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="../index.html">
+            <h1>🛡️ Cyber Challenge</h1>
+        </a>
+
+        <h2>تواصل معنا | Contact Us</h2>
+    </header>
+
+    <!-- Navigation -->
+    <nav aria-label="التنقل الرئيسي">
+        <a href="../index.html">الرئيسية | Home</a>
+        <a href="challenges.html">التحديات | Challenges</a>
+        <a href="about.html">عن المنصة | About</a>
+        <a href="contact.html" aria-current="page">تواصل معنا | Contact Us</a>
+        <a href="login.html">تسجيل الدخول | Login</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Contact Information -->
+        <section aria-labelledby="contact-info-title">
+
+            <h2 id="contact-info-title">يسعدنا التواصل معك</h2>
+
+            <p>
+                أرسل استفسارك أو ملاحظاتك المتعلقة بالمنصة
+                باستخدام النموذج التالي.
+            </p>
+
+        </section>
+
+        <!-- Contact Form -->
+        <section aria-labelledby="contact-form-title">
+
+            <h2 id="contact-form-title">نموذج التواصل | Contact Form</h2>
+
+            <form action="#" method="post">
+
+                <!-- Full Name -->
+                <div>
+                    <label for="full-name">
+                        الاسم الكامل | Full Name
+                    </label>
+
+                    <br>
+
+                    <input
+                        type="text"
+                        id="full-name"
+                        name="full_name"
+                        autocomplete="name"
+                        placeholder="أدخل اسمك الكامل"
+                        required>
+                </div>
+
+                <br>
+
+                <!-- Email -->
+                <div>
+                    <label for="email">
+                        البريد الإلكتروني | Email Address
+                    </label>
+
+                    <br>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        placeholder="أدخل بريدك الإلكتروني"
+                        required>
+                </div>
+
+                <br>
+
+                <!-- Message Type -->
+                <div>
+                    <label for="message-type">
+                        نوع الرسالة | Message Type
+                    </label>
+
+                    <br>
+
+                    <select
+                        id="message-type"
+                        name="message_type"
+                        required>
+
+                        <option value="">اختر نوع الرسالة</option>
+
+                        <option value="inquiry">استفسار</option>
+
+                        <option value="suggestion">اقتراح</option>
+
+                        <option value="technical">مشكلة تقنية</option>
+
+                        <option value="report">بلاغ</option>
+
+                        <option value="other">أخرى</option>
+
+                    </select>
+                </div>
+
+                <br>
+
+                <!-- Subject -->
+                <div>
+                    <label for="subject">
+                        موضوع الرسالة | Subject
+                    </label>
+
+                    <br>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="اكتب موضوع الرسالة"
+                        maxlength="150"
+                        required>
+                </div>
+
+                <br>
+
+                <!-- Message -->
+                <div>
+                    <label for="message">
+                        نص الرسالة | Message
+                    </label>
+
+                    <br>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        maxlength="3000"
+                        placeholder="اكتب رسالتك هنا"
+                        required></textarea>
+                </div>
+
+                <br>
+
+                <!-- Submit -->
+                <button type="submit">
+                    إرسال الرسالة | Send Message
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Return Navigation -->
+        <section aria-label="العودة">
+
+            <p>
+                <a href="../index.html">العودة إلى الرئيسية</a>
+            </p>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+
+        <p>© 2026 Cyber Challenge</p>
+
+        <a href="about.html">عن المنصة | About</a>
+
+    </footer>
+
+</body>
+
+</html>
