@@ -1,87 +1,177 @@
 
-/* =====================================
-   Cyber Challenge - Main CSS
-   Version 1.0
-   ===================================== */
+/* ==================================================
+   Cyber Challenge
+   Main Stylesheet - Version 2.0
+   Responsive | Accessible | Mobile First
+   ================================================== */
 
-/* 1. Global Settings */
+
+/* 1. CSS Variables */
+
 :root {
+    color-scheme: dark;
+
     --bg-color: #08111f;
     --surface-color: #111e30;
     --surface-hover: #172840;
+
     --primary-color: #00e5a0;
     --primary-hover: #00c98b;
+
     --text-color: #f1f5f9;
     --muted-color: #a7b4c7;
+
     --border-color: #26364b;
     --danger-color: #ff647c;
-    --radius: 14px;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.22);
+
+    --container-width: 1100px;
+    --page-padding: 20px;
+
     --transition: 0.25s ease;
 }
 
-* {
+
+/* 2. Reset and Global Settings */
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
 html {
+    width: 100%;
+    min-width: 320px;
     scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+    overflow-wrap: break-word;
 }
 
 body {
+    min-width: 320px;
+    min-height: 100vh;
     margin: 0;
+
     font-family: Tahoma, Arial, sans-serif;
     font-size: 16px;
     line-height: 1.8;
+
     color: var(--text-color);
     background-color: var(--bg-color);
+
     direction: rtl;
+    text-align: right;
 }
 
-/* 2. Headings and Text */
-h1,
-h2,
-h3,
-h4 {
-    line-height: 1.5;
-    margin-top: 0;
+img,
+video,
+iframe,
+svg {
+    max-width: 100%;
 }
 
-h1 {
-    font-size: 2rem;
+img,
+video {
+    height: auto;
 }
 
-h2 {
-    font-size: 1.6rem;
-    color: var(--primary-color);
+button,
+input,
+select,
+textarea {
+    font: inherit;
 }
 
-h3 {
-    font-size: 1.2rem;
-}
-
-p {
-    color: var(--muted-color);
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
 }
 
 a {
     color: var(--primary-color);
     text-decoration: none;
-    transition: color var(--transition);
+    transition:
+        color var(--transition),
+        background-color var(--transition),
+        border-color var(--transition);
 }
 
 a:hover {
     color: var(--primary-hover);
 }
 
-/* 3. Header */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+::selection {
+    color: var(--bg-color);
+    background-color: var(--primary-color);
+}
+
+
+/* 3. Headings and Text */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+}
+
+h2 {
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    color: var(--primary-color);
+}
+
+h3 {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+}
+
+p {
+    margin-top: 0;
+    color: var(--muted-color);
+}
+
+small {
+    font-size: 0.875rem;
+}
+
+
+/* 4. Header */
+
 header {
-    padding: 28px 6%;
+    padding: 28px var(--page-padding);
     text-align: center;
+
     background: linear-gradient(
         135deg,
         #101f34,
         #0b1727
     );
+
     border-bottom: 1px solid var(--border-color);
 }
 
@@ -91,26 +181,29 @@ header h1 {
 }
 
 header p {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
-/* 4. Navigation */
+
+/* 5. Navigation */
+
 nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+
     margin-top: 20px;
 }
 
 nav a {
     display: inline-block;
-    padding: 8px 14px;
+    padding: 8px 13px;
+
     color: var(--text-color);
     border: 1px solid transparent;
-    border-radius: 8px;
-    transition: all var(--transition);
+    border-radius: var(--radius-sm);
 }
 
 nav a:hover,
@@ -121,11 +214,17 @@ nav a[aria-current="page"] {
     border-color: rgba(0, 229, 160, 0.25);
 }
 
-/* 5. Main Content */
+
+/* 6. Main Content */
+
 main {
-    width: min(1100px, 92%);
-    margin: 35px auto;
+    width: min(
+        var(--container-width),
+        calc(100% - 2 * var(--page-padding))
+    );
+
     min-height: 50vh;
+    margin: 32px auto;
 }
 
 main > section,
@@ -135,7 +234,8 @@ main > form {
 }
 
 section {
-    margin-bottom: 32px;
+    min-width: 0;
+    margin-bottom: 28px;
 }
 
 section > h2 {
@@ -143,99 +243,159 @@ section > h2 {
     border-bottom: 1px solid var(--border-color);
 }
 
-/* 6. Cards and Articles */
+
+/* 7. Cards and Articles */
+
 article {
+    min-width: 0;
     padding: 22px;
     margin: 16px 0;
+
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
+
+    overflow-wrap: anywhere;
+
     transition:
         transform var(--transition),
         border-color var(--transition),
-        background-color var(--transition);
-}
-
-article:hover {
-    transform: translateY(-3px);
-    border-color: var(--primary-color);
-    background-color: var(--surface-hover);
+        background-color var(--transition),
+        box-shadow var(--transition);
 }
 
 article h3 {
-    color: var(--primary-color);
     margin-bottom: 10px;
+    color: var(--primary-color);
 }
 
-/* 7. Buttons and Action Links */
+article p:last-child {
+    margin-bottom: 0;
+}
+
+@media (hover: hover) {
+    article:hover {
+        transform: translateY(-3px);
+        border-color: var(--primary-color);
+        background-color: var(--surface-hover);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+
+/* 8. Buttons and Action Links */
+
 button,
 input[type="submit"],
 input[type="button"],
 .button {
     display: inline-block;
-    padding: 11px 22px;
+    max-width: 100%;
+    padding: 11px 20px;
+
     font-family: inherit;
     font-size: 1rem;
     font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+
     color: #06131a;
     background-color: var(--primary-color);
+
     border: 1px solid var(--primary-color);
-    border-radius: 9px;
+    border-radius: var(--radius-sm);
+
     cursor: pointer;
-    transition: all var(--transition);
+
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
 }
 
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 .button:hover {
+    color: #06131a;
     background-color: var(--primary-hover);
     border-color: var(--primary-hover);
-    color: #06131a;
-    transform: translateY(-2px);
+}
+
+@media (hover: hover) {
+    button:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    .button:hover {
+        transform: translateY(-2px);
+    }
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
 }
 
 main a.button {
     text-align: center;
 }
 
-/* 8. Forms */
+
+/* 9. Forms */
+
 form {
     width: min(100%, 650px);
-    margin: 25px auto;
-    padding: 25px;
+    margin: 24px auto;
+    padding: 24px;
+
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
 }
 
 label {
     display: block;
     margin: 14px 0 6px;
+
     color: var(--text-color);
     font-weight: bold;
 }
 
-input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]),
 select,
 textarea {
     display: block;
     width: 100%;
-    padding: 12px;
+    min-width: 0;
+    padding: 11px 12px;
     margin-bottom: 14px;
-    font: inherit;
+
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+
     color: var(--text-color);
     background-color: #091525;
+
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
+
     outline: none;
-    transition: border-color var(--transition);
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
 }
 
 input:focus,
 select:focus,
 textarea:focus {
     border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1);
 }
 
 input[type="checkbox"],
@@ -250,12 +410,21 @@ textarea {
 
 ::placeholder {
     color: #8291a7;
+    opacity: 1;
 }
 
-/* 9. Tables */
+form button,
+form input[type="submit"] {
+    margin-top: 8px;
+}
+
+
+/* 10. Tables */
+
 table {
     width: 100%;
     margin: 20px 0;
+
     border-collapse: collapse;
     background-color: var(--surface-color);
     border: 1px solid var(--border-color);
@@ -265,6 +434,8 @@ th,
 td {
     padding: 12px;
     text-align: right;
+    vertical-align: top;
+
     border: 1px solid var(--border-color);
 }
 
@@ -277,7 +448,9 @@ tbody tr:nth-child(even) {
     background-color: #0d192a;
 }
 
-/* 10. Lists */
+
+/* 11. Lists */
+
 ol,
 ul {
     padding-right: 28px;
@@ -287,13 +460,16 @@ li {
     margin-bottom: 8px;
 }
 
-/* 11. Aside */
+
+/* 12. Aside and Information Panels */
+
 aside {
-    padding: 20px;
-    margin: 25px 0;
+    padding: 18px;
+    margin: 24px 0;
+
     background-color: rgba(0, 229, 160, 0.06);
     border-right: 4px solid var(--primary-color);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
 }
 
 aside h2,
@@ -301,22 +477,30 @@ aside h3 {
     color: var(--primary-color);
 }
 
-/* 12. Images and Media */
-img,
-video,
-iframe {
-    max-width: 100%;
-}
+
+/* 13. Images and Media */
 
 img {
-    height: auto;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
 }
 
-/* 13. Footer */
+figure {
+    margin: 20px 0;
+}
+
+figcaption {
+    margin-top: 8px;
+    color: var(--muted-color);
+    font-size: 0.9rem;
+}
+
+
+/* 14. Footer */
+
 footer {
-    padding: 28px 6%;
-    margin-top: 45px;
+    padding: 26px var(--page-padding);
+    margin-top: 40px;
+
     text-align: center;
     background-color: #060d17;
     border-top: 1px solid var(--border-color);
@@ -330,13 +514,15 @@ footer p {
     margin: 8px 0;
 }
 
-/* 14. Feedback Messages */
+
+/* 15. Status and Feedback Messages */
+
 .success {
     padding: 12px;
     color: #8fffd6;
     background-color: rgba(0, 229, 160, 0.08);
     border: 1px solid var(--primary-color);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
 }
 
 .error {
@@ -344,248 +530,125 @@ footer p {
     color: #ff9aaa;
     background-color: rgba(255, 100, 124, 0.08);
     border: 1px solid var(--danger-color);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
 }
 
-/* 15. Accessibility */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 3px;
-}
 
-/* 16. Responsive Design */
+/* 16. Responsive Layout: Tablets */
+
 @media (max-width: 768px) {
+    :root {
+        --page-padding: 16px;
+    }
+
     body {
         font-size: 15px;
     }
 
     header {
-        padding: 22px 4%;
-    }
-
-    header h1 {
-        font-size: 1.7rem;
-    }
-
-    nav {
-        gap: 6px;
-    }
-
-    nav a {
-        padding: 7px 10px;
-        font-size: 0.9rem;
-    }
-
-    main {
-        width: 92%;
-        margin: 24px auto;
-    }
-
-    article {
-        padding: 16px;
-    }
-
-    form {
-        padding: 18px;
-    }
-
-    table {
-        font-size: 0.9rem;
-    }
-
-    th,
-    td {
-        padding: 8px;
-    }
-
-    footer {
-        padding: 22px 4%;
-    }
-}
-
-@media (max-width: 400px) {
-    nav {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    nav a {
-        text-align: center;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    h2 {
-        font-size: 1.3rem;
-    }
-}
-
-/* =====================================
-   Responsive Design Improvements
-   Cyber Challenge
-   ===================================== */
-
-/* منع تجاوز العناصر لعرض الشاشة */
-html {
-    width: 100%;
-    overflow-x: hidden;
-}
-
-body {
-    width: 100%;
-    min-width: 320px;
-}
-
-img,
-video,
-iframe {
-    max-width: 100%;
-}
-
-/* الحاويات الرئيسية */
-main {
-    width: min(1100px, 92%);
-    margin-inline: auto;
-}
-
-/* البطاقات */
-section {
-    min-width: 0;
-}
-
-article {
-    overflow-wrap: anywhere;
-}
-
-/* الجداول الطويلة */
-table {
-    width: 100%;
-}
-
-@media (max-width: 768px) {
-    header {
-        padding: 22px 4%;
+        padding-top: 22px;
+        padding-bottom: 22px;
     }
 
     header h1 {
         font-size: 1.6rem;
     }
 
-    main {
-        width: 94%;
-        margin-top: 22px;
-    }
-
     nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
         gap: 6px;
     }
 
     nav a {
-        padding: 7px 10px;
-        font-size: 0.9rem;
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        text-align: center;
+    }
+
+    main {
+        width: calc(100% - 2 * var(--page-padding));
+        margin-top: 24px;
+        margin-bottom: 24px;
     }
 
     article {
-        padding: 16px;
-    }
-
-    form {
-        width: 100%;
         padding: 18px;
     }
 
-    /* السماح بتمرير الجداول العريضة */
-    main {
-        overflow-wrap: break-word;
+    form {
+        padding: 20px;
     }
 
-    table {
-        display: block;
+    .table-wrapper {
+        width: 100%;
         overflow-x: auto;
-        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
     }
 
-    button,
-    input[type="submit"],
-    input[type="button"] {
-        max-width: 100%;
+    .table-wrapper table {
+        min-width: 520px;
+    }
+
+    th,
+    td {
+        padding: 9px;
+    }
+
+    footer {
+        padding-top: 22px;
+        padding-bottom: 22px;
     }
 }
 
-/* الهواتف الصغيرة */
-@media (max-width: 480px) {
+
+/* 17. Responsive Layout: Small Phones */
+
+@media (max-width: 400px) {
+    :root {
+        --page-padding: 12px;
+    }
+
     body {
         font-size: 14px;
-        line-height: 1.8;
     }
 
     header h1 {
         font-size: 1.4rem;
     }
 
-    h2 {
-        font-size: 1.25rem;
-    }
-
-    h3 {
-        font-size: 1.05rem;
-    }
-
-    nav {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    nav a {
-        width: 100%;
-        text-align: center;
-    }
-
-    main {
-        width: 92%;
-    }
-
     article {
-        margin: 12px 0;
         padding: 14px;
+        margin: 12px 0;
     }
 
     form {
-        padding: 14px;
+        padding: 15px;
     }
 
-    input:not([type="checkbox"]):not([type="radio"]),
-    select,
-    textarea {
-        max-width: 100%;
-        font-size: 16px;
-    }
-
-    footer {
-        padding: 20px 4%;
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .button {
+        padding: 10px 14px;
     }
 }
 
-/* الكمبيوتر والشاشات الكبيرة */
-@media (min-width: 1024px) {
-    main {
-        width: min(1100px, 90%);
+
+/* 18. Reduced Motion Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 
-    header {
-        padding: 32px 6%;
-    }
-
-    article {
-        padding: 24px;
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
