@@ -1,12 +1,12 @@
 
 /* ==================================================
    Cyber Challenge
-   Main Stylesheet - Version 2.0
-   Responsive | Accessible | Mobile First
+   Main Stylesheet - Version 3.0
+   Responsive | Accessible | RTL | Unified Design
    ================================================== */
 
 
-/* 1. CSS Variables */
+/* 1. Design Tokens */
 
 :root {
     color-scheme: dark;
@@ -14,9 +14,11 @@
     --bg-color: #08111f;
     --surface-color: #111e30;
     --surface-hover: #172840;
+    --surface-soft: #0c192a;
 
     --primary-color: #00e5a0;
     --primary-hover: #00c98b;
+    --primary-soft: rgba(0, 229, 160, 0.09);
 
     --text-color: #f1f5f9;
     --muted-color: #a7b4c7;
@@ -27,18 +29,19 @@
     --radius-sm: 8px;
     --radius-md: 12px;
     --radius-lg: 16px;
+    --radius-xl: 22px;
 
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.15);
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.22);
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.16);
+    --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.24);
 
     --container-width: 1100px;
     --page-padding: 20px;
 
-    --transition: 0.25s ease;
+    --transition: 0.22s ease;
 }
 
 
-/* 2. Reset and Global Settings */
+/* 2. Reset */
 
 *,
 *::before,
@@ -47,7 +50,6 @@
 }
 
 html {
-    width: 100%;
     min-width: 320px;
     scroll-behavior: smooth;
     scroll-padding-top: 20px;
@@ -64,7 +66,13 @@ body {
     line-height: 1.8;
 
     color: var(--text-color);
-    background-color: var(--bg-color);
+    background:
+        radial-gradient(
+            ellipse at top,
+            rgba(0, 229, 160, 0.045),
+            transparent 48%
+        ),
+        var(--bg-color);
 
     direction: rtl;
     text-align: right;
@@ -86,6 +94,7 @@ button,
 input,
 select,
 textarea {
+    max-width: 100%;
     font: inherit;
 }
 
@@ -93,12 +102,21 @@ button,
 input,
 select,
 textarea {
-    max-width: 100%;
+    color: inherit;
 }
+
+::selection {
+    color: var(--bg-color);
+    background: var(--primary-color);
+}
+
+
+/* 3. Links */
 
 a {
     color: var(--primary-color);
     text-decoration: none;
+
     transition:
         color var(--transition),
         background-color var(--transition),
@@ -118,13 +136,8 @@ textarea:focus-visible {
     outline-offset: 4px;
 }
 
-::selection {
-    color: var(--bg-color);
-    background-color: var(--primary-color);
-}
 
-
-/* 3. Headings and Text */
+/* 4. Typography */
 
 h1,
 h2,
@@ -138,7 +151,8 @@ h6 {
 }
 
 h1 {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: 10px;
+    font-size: clamp(1.55rem, 4vw, 2.2rem);
 }
 
 h2 {
@@ -159,18 +173,23 @@ small {
     font-size: 0.875rem;
 }
 
+strong {
+    color: var(--text-color);
+}
 
-/* 4. Header */
+
+/* 5. Header */
 
 header {
-    padding: 28px var(--page-padding);
+    padding: 30px var(--page-padding);
     text-align: center;
 
-    background: linear-gradient(
-        135deg,
-        #101f34,
-        #0b1727
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 30, 48, 0.98),
+            rgba(8, 17, 31, 0.98)
+        );
 
     border-bottom: 1px solid var(--border-color);
 }
@@ -180,12 +199,25 @@ header h1 {
     color: var(--primary-color);
 }
 
+header h2 {
+    margin: 12px 0;
+}
+
 header p {
-    margin-bottom: 16px;
+    max-width: 720px;
+    margin: 0 auto 12px;
+}
+
+header > a {
+    display: inline-block;
+}
+
+header > a:hover {
+    color: var(--primary-color);
 }
 
 
-/* 5. Navigation */
+/* 6. Navigation */
 
 nav {
     display: flex;
@@ -194,7 +226,8 @@ nav {
     align-items: center;
     gap: 8px;
 
-    margin-top: 20px;
+    max-width: var(--container-width);
+    margin: 20px auto 0;
 }
 
 nav a {
@@ -210,12 +243,12 @@ nav a:hover,
 nav a.active,
 nav a[aria-current="page"] {
     color: var(--primary-color);
-    background-color: rgba(0, 229, 160, 0.08);
-    border-color: rgba(0, 229, 160, 0.25);
+    background: var(--primary-soft);
+    border-color: rgba(0, 229, 160, 0.24);
 }
 
 
-/* 6. Main Content */
+/* 7. Main Layout */
 
 main {
     width: min(
@@ -224,13 +257,12 @@ main {
     );
 
     min-height: 50vh;
-    margin: 32px auto;
+    margin: 34px auto;
 }
 
 main > section,
-main > article,
-main > form {
-    margin-bottom: 28px;
+main > article {
+    margin-bottom: 30px;
 }
 
 section {
@@ -243,15 +275,19 @@ section > h2 {
     border-bottom: 1px solid var(--border-color);
 }
 
+section > p:last-child {
+    margin-bottom: 0;
+}
 
-/* 7. Cards and Articles */
+
+/* 8. Cards */
 
 article {
     min-width: 0;
     padding: 22px;
     margin: 16px 0;
 
-    background-color: var(--surface-color);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
 
@@ -275,15 +311,14 @@ article p:last-child {
 
 @media (hover: hover) {
     article:hover {
-        transform: translateY(-3px);
-        border-color: var(--primary-color);
-        background-color: var(--surface-hover);
+        border-color: rgba(0, 229, 160, 0.55);
+        background: var(--surface-hover);
         box-shadow: var(--shadow-sm);
     }
 }
 
 
-/* 8. Buttons and Action Links */
+/* 9. Buttons */
 
 button,
 input[type="submit"],
@@ -300,7 +335,7 @@ input[type="button"],
     text-align: center;
 
     color: #06131a;
-    background-color: var(--primary-color);
+    background: var(--primary-color);
 
     border: 1px solid var(--primary-color);
     border-radius: var(--radius-sm);
@@ -308,6 +343,7 @@ input[type="button"],
     cursor: pointer;
 
     transition:
+        color var(--transition),
         background-color var(--transition),
         border-color var(--transition),
         transform var(--transition);
@@ -318,7 +354,7 @@ input[type="submit"]:hover,
 input[type="button"]:hover,
 .button:hover {
     color: #06131a;
-    background-color: var(--primary-hover);
+    background: var(--primary-hover);
     border-color: var(--primary-hover);
 }
 
@@ -339,27 +375,23 @@ textarea:disabled {
     cursor: not-allowed;
 }
 
-main a.button {
-    text-align: center;
-}
 
-
-/* 9. Forms */
+/* 10. Forms */
 
 form {
     width: min(100%, 650px);
     margin: 24px auto;
     padding: 24px;
 
-    background-color: var(--surface-color);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
 }
 
 label {
-    display: block;
-    margin: 14px 0 6px;
+    display: inline-block;
+    margin: 8px 0 6px;
 
     color: var(--text-color);
     font-weight: bold;
@@ -372,19 +404,17 @@ textarea {
     width: 100%;
     min-width: 0;
     padding: 11px 12px;
-    margin-bottom: 14px;
+    margin: 0 0 14px;
 
     font-family: inherit;
     font-size: 16px;
     line-height: 1.5;
 
     color: var(--text-color);
-    background-color: #091525;
+    background: #091525;
 
     border: 1px solid var(--border-color);
     border-radius: var(--radius-sm);
-
-    outline: none;
 
     transition:
         border-color var(--transition),
@@ -401,11 +431,16 @@ textarea:focus {
 input[type="checkbox"],
 input[type="radio"] {
     accent-color: var(--primary-color);
+    cursor: pointer;
 }
 
 textarea {
     min-height: 130px;
     resize: vertical;
+}
+
+select {
+    cursor: pointer;
 }
 
 ::placeholder {
@@ -419,14 +454,56 @@ form input[type="submit"] {
 }
 
 
-/* 10. Tables */
+/* 11. Challenge Questions */
+
+fieldset {
+    min-width: 0;
+    padding: 18px;
+    margin: 0 0 22px;
+
+    background: var(--surface-soft);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+legend {
+    padding: 0 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+fieldset label {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+fieldset input[type="radio"] {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+fieldset br {
+    display: block;
+    content: "";
+    margin-bottom: 10px;
+}
+
+fieldset input[type="radio"]:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+
+/* 12. Tables */
 
 table {
     width: 100%;
     margin: 20px 0;
 
     border-collapse: collapse;
-    background-color: var(--surface-color);
+    background: var(--surface-color);
     border: 1px solid var(--border-color);
 }
 
@@ -441,15 +518,25 @@ td {
 
 th {
     color: var(--primary-color);
-    background-color: #172840;
+    background: #172840;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #0d192a;
+    background: #0d192a;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper table {
+    min-width: 520px;
 }
 
 
-/* 11. Lists */
+/* 13. Lists */
 
 ol,
 ul {
@@ -460,16 +547,21 @@ li {
     margin-bottom: 8px;
 }
 
+li:last-child {
+    margin-bottom: 0;
+}
 
-/* 12. Aside and Information Panels */
+
+/* 14. Aside and Information Panels */
 
 aside {
-    padding: 18px;
+    padding: 20px;
     margin: 24px 0;
 
-    background-color: rgba(0, 229, 160, 0.06);
+    background: var(--primary-soft);
+    border: 1px solid rgba(0, 229, 160, 0.15);
     border-right: 4px solid var(--primary-color);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
 }
 
 aside h2,
@@ -478,7 +570,34 @@ aside h3 {
 }
 
 
-/* 13. Images and Media */
+/* 15. Profile Details */
+
+dl {
+    padding: 18px;
+    margin: 20px 0;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+dt {
+    margin-top: 14px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+dt:first-child {
+    margin-top: 0;
+}
+
+dd {
+    margin: 4px 0 0;
+    color: var(--muted-color);
+}
+
+
+/* 16. Images and Figures */
 
 img {
     border-radius: var(--radius-sm);
@@ -488,6 +607,10 @@ figure {
     margin: 20px 0;
 }
 
+figure img {
+    object-fit: cover;
+}
+
 figcaption {
     margin-top: 8px;
     color: var(--muted-color);
@@ -495,14 +618,33 @@ figcaption {
 }
 
 
-/* 14. Footer */
+/* 17. Status Messages */
+
+.success {
+    padding: 12px;
+    color: #8fffd6;
+    background: rgba(0, 229, 160, 0.08);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+}
+
+.error {
+    padding: 12px;
+    color: #ff9aaa;
+    background: rgba(255, 100, 124, 0.08);
+    border: 1px solid var(--danger-color);
+    border-radius: var(--radius-sm);
+}
+
+
+/* 18. Footer */
 
 footer {
     padding: 26px var(--page-padding);
     margin-top: 40px;
 
     text-align: center;
-    background-color: #060d17;
+    background: #060d17;
     border-top: 1px solid var(--border-color);
 }
 
@@ -514,27 +656,13 @@ footer p {
     margin: 8px 0;
 }
 
-
-/* 15. Status and Feedback Messages */
-
-.success {
-    padding: 12px;
-    color: #8fffd6;
-    background-color: rgba(0, 229, 160, 0.08);
-    border: 1px solid var(--primary-color);
-    border-radius: var(--radius-sm);
-}
-
-.error {
-    padding: 12px;
-    color: #ff9aaa;
-    background-color: rgba(255, 100, 124, 0.08);
-    border: 1px solid var(--danger-color);
-    border-radius: var(--radius-sm);
+footer a {
+    display: inline-block;
+    margin: 4px;
 }
 
 
-/* 16. Responsive Layout: Tablets */
+/* 19. Tablet Layout */
 
 @media (max-width: 768px) {
     :root {
@@ -548,10 +676,6 @@ footer p {
     header {
         padding-top: 22px;
         padding-bottom: 22px;
-    }
-
-    header h1 {
-        font-size: 1.6rem;
     }
 
     nav {
@@ -581,14 +705,8 @@ footer p {
         padding: 20px;
     }
 
-    .table-wrapper {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .table-wrapper table {
-        min-width: 520px;
+    fieldset {
+        padding: 14px;
     }
 
     th,
@@ -603,7 +721,7 @@ footer p {
 }
 
 
-/* 17. Responsive Layout: Small Phones */
+/* 20. Small Phones */
 
 @media (max-width: 400px) {
     :root {
@@ -633,10 +751,14 @@ footer p {
     .button {
         padding: 10px 14px;
     }
+
+    fieldset {
+        padding: 12px;
+    }
 }
 
 
-/* 18. Reduced Motion Accessibility */
+/* 21. Reduced Motion */
 
 @media (prefers-reduced-motion: reduce) {
     html {
