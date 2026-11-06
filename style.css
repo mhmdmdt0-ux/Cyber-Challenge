@@ -1,0 +1,776 @@
+
+/* ==================================================
+   Cyber Challenge
+   Main Stylesheet - Version 3.0
+   Responsive | Accessible | RTL | Unified Design
+   ================================================== */
+
+
+/* 1. Design Tokens */
+
+:root {
+    color-scheme: dark;
+
+    --bg-color: #08111f;
+    --surface-color: #111e30;
+    --surface-hover: #172840;
+    --surface-soft: #0c192a;
+
+    --primary-color: #00e5a0;
+    --primary-hover: #00c98b;
+    --primary-soft: rgba(0, 229, 160, 0.09);
+
+    --text-color: #f1f5f9;
+    --muted-color: #a7b4c7;
+
+    --border-color: #26364b;
+    --danger-color: #ff647c;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 22px;
+
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.16);
+    --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.24);
+
+    --container-width: 1100px;
+    --page-padding: 20px;
+
+    --transition: 0.22s ease;
+}
+
+
+/* 2. Reset */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+    overflow-wrap: break-word;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+
+    color: var(--text-color);
+    background:
+        radial-gradient(
+            ellipse at top,
+            rgba(0, 229, 160, 0.045),
+            transparent 48%
+        ),
+        var(--bg-color);
+
+    direction: rtl;
+    text-align: right;
+}
+
+img,
+video,
+iframe,
+svg {
+    max-width: 100%;
+}
+
+img,
+video {
+    height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
+    font: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    color: inherit;
+}
+
+::selection {
+    color: var(--bg-color);
+    background: var(--primary-color);
+}
+
+
+/* 3. Links */
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+
+    transition:
+        color var(--transition),
+        background-color var(--transition),
+        border-color var(--transition);
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+}
+
+
+/* 4. Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: clamp(1.55rem, 4vw, 2.2rem);
+}
+
+h2 {
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    color: var(--primary-color);
+}
+
+h3 {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+}
+
+p {
+    margin-top: 0;
+    color: var(--muted-color);
+}
+
+small {
+    font-size: 0.875rem;
+}
+
+strong {
+    color: var(--text-color);
+}
+
+
+/* 5. Header */
+
+header {
+    padding: 30px var(--page-padding);
+    text-align: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(17, 30, 48, 0.98),
+            rgba(8, 17, 31, 0.98)
+        );
+
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+header h2 {
+    margin: 12px 0;
+}
+
+header p {
+    max-width: 720px;
+    margin: 0 auto 12px;
+}
+
+header > a {
+    display: inline-block;
+}
+
+header > a:hover {
+    color: var(--primary-color);
+}
+
+
+/* 6. Navigation */
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    max-width: var(--container-width);
+    margin: 20px auto 0;
+}
+
+nav a {
+    display: inline-block;
+    padding: 8px 13px;
+
+    color: var(--text-color);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+}
+
+nav a:hover,
+nav a.active,
+nav a[aria-current="page"] {
+    color: var(--primary-color);
+    background: var(--primary-soft);
+    border-color: rgba(0, 229, 160, 0.24);
+}
+
+
+/* 7. Main Layout */
+
+main {
+    width: min(
+        var(--container-width),
+        calc(100% - 2 * var(--page-padding))
+    );
+
+    min-height: 50vh;
+    margin: 34px auto;
+}
+
+main > section,
+main > article {
+    margin-bottom: 30px;
+}
+
+section {
+    min-width: 0;
+    margin-bottom: 28px;
+}
+
+section > h2 {
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+section > p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* 8. Cards */
+
+article {
+    min-width: 0;
+    padding: 22px;
+    margin: 16px 0;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+
+    overflow-wrap: anywhere;
+
+    transition:
+        transform var(--transition),
+        border-color var(--transition),
+        background-color var(--transition),
+        box-shadow var(--transition);
+}
+
+article h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+article p:last-child {
+    margin-bottom: 0;
+}
+
+@media (hover: hover) {
+    article:hover {
+        border-color: rgba(0, 229, 160, 0.55);
+        background: var(--surface-hover);
+        box-shadow: var(--shadow-sm);
+    }
+}
+
+
+/* 9. Buttons */
+
+button,
+input[type="submit"],
+input[type="button"],
+.button {
+    display: inline-block;
+    max-width: 100%;
+    padding: 11px 20px;
+
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1.5;
+    text-align: center;
+
+    color: #06131a;
+    background: var(--primary-color);
+
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+
+    cursor: pointer;
+
+    transition:
+        color var(--transition),
+        background-color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.button:hover {
+    color: #06131a;
+    background: var(--primary-hover);
+    border-color: var(--primary-hover);
+}
+
+@media (hover: hover) {
+    button:hover,
+    input[type="submit"]:hover,
+    input[type="button"]:hover,
+    .button:hover {
+        transform: translateY(-2px);
+    }
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+
+/* 10. Forms */
+
+form {
+    width: min(100%, 650px);
+    margin: 24px auto;
+    padding: 24px;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+label {
+    display: inline-block;
+    margin: 8px 0 6px;
+
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]),
+select,
+textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    padding: 11px 12px;
+    margin: 0 0 14px;
+
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+
+    color: var(--text-color);
+    background: #091525;
+
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+
+    transition:
+        border-color var(--transition),
+        box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 229, 160, 0.1);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+select {
+    cursor: pointer;
+}
+
+::placeholder {
+    color: #8291a7;
+    opacity: 1;
+}
+
+form button,
+form input[type="submit"] {
+    margin-top: 8px;
+}
+
+
+/* 11. Challenge Questions */
+
+fieldset {
+    min-width: 0;
+    padding: 18px;
+    margin: 0 0 22px;
+
+    background: var(--surface-soft);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+legend {
+    padding: 0 8px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+fieldset label {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+fieldset input[type="radio"] {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+fieldset br {
+    display: block;
+    content: "";
+    margin-bottom: 10px;
+}
+
+fieldset input[type="radio"]:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+
+/* 12. Tables */
+
+table {
+    width: 100%;
+    margin: 20px 0;
+
+    border-collapse: collapse;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: right;
+    vertical-align: top;
+
+    border: 1px solid var(--border-color);
+}
+
+th {
+    color: var(--primary-color);
+    background: #172840;
+}
+
+tbody tr:nth-child(even) {
+    background: #0d192a;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-wrapper table {
+    min-width: 520px;
+}
+
+
+/* 13. Lists */
+
+ol,
+ul {
+    padding-right: 28px;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+
+/* 14. Aside and Information Panels */
+
+aside {
+    padding: 20px;
+    margin: 24px 0;
+
+    background: var(--primary-soft);
+    border: 1px solid rgba(0, 229, 160, 0.15);
+    border-right: 4px solid var(--primary-color);
+    border-radius: var(--radius-md);
+}
+
+aside h2,
+aside h3 {
+    color: var(--primary-color);
+}
+
+
+/* 15. Profile Details */
+
+dl {
+    padding: 18px;
+    margin: 20px 0;
+
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+dt {
+    margin-top: 14px;
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+dt:first-child {
+    margin-top: 0;
+}
+
+dd {
+    margin: 4px 0 0;
+    color: var(--muted-color);
+}
+
+
+/* 16. Images and Figures */
+
+img {
+    border-radius: var(--radius-sm);
+}
+
+figure {
+    margin: 20px 0;
+}
+
+figure img {
+    object-fit: cover;
+}
+
+figcaption {
+    margin-top: 8px;
+    color: var(--muted-color);
+    font-size: 0.9rem;
+}
+
+
+/* 17. Status Messages */
+
+.success {
+    padding: 12px;
+    color: #8fffd6;
+    background: rgba(0, 229, 160, 0.08);
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius-sm);
+}
+
+.error {
+    padding: 12px;
+    color: #ff9aaa;
+    background: rgba(255, 100, 124, 0.08);
+    border: 1px solid var(--danger-color);
+    border-radius: var(--radius-sm);
+}
+
+
+/* 18. Footer */
+
+footer {
+    padding: 26px var(--page-padding);
+    margin-top: 40px;
+
+    text-align: center;
+    background: #060d17;
+    border-top: 1px solid var(--border-color);
+}
+
+footer h3 {
+    color: var(--primary-color);
+}
+
+footer p {
+    margin: 8px 0;
+}
+
+footer a {
+    display: inline-block;
+    margin: 4px;
+}
+
+
+/* 19. Tablet Layout */
+
+@media (max-width: 768px) {
+    :root {
+        --page-padding: 16px;
+    }
+
+    body {
+        font-size: 15px;
+    }
+
+    header {
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    nav a {
+        display: block;
+        width: 100%;
+        padding: 10px 12px;
+        text-align: center;
+    }
+
+    main {
+        width: calc(100% - 2 * var(--page-padding));
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    article {
+        padding: 18px;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    fieldset {
+        padding: 14px;
+    }
+
+    th,
+    td {
+        padding: 9px;
+    }
+
+    footer {
+        padding-top: 22px;
+        padding-bottom: 22px;
+    }
+}
+
+
+/* 20. Small Phones */
+
+@media (max-width: 400px) {
+    :root {
+        --page-padding: 12px;
+    }
+
+    body {
+        font-size: 14px;
+    }
+
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    article {
+        padding: 14px;
+        margin: 12px 0;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    button,
+    input[type="submit"],
+    input[type="button"],
+    .button {
+        padding: 10px 14px;
+    }
+
+    fieldset {
+        padding: 12px;
+    }
+}
+
+
+/* 21. Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
